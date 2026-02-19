@@ -1,0 +1,9 @@
+---
+all: 
+  hosts:
+     redhat-host:
+         ansible_host: 192.168.56.93
+	 ansible_host: 192.168.56.94
+	 ansible_host: 192.168.56.95
+
+	
