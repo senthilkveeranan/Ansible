@@ -1,0 +1,32 @@
+---
+- name: Create Vagrant VM for Rocky Linux
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  vars:
+    vm_dir: /home/vagrant/rocky_vm
+    memory: 512   # in MB
+    cpus: 1
+
+  tasks:
+
+    - name: Create VM directory
+      file:
+        path: "{{ vm_dir }}"
+        state: directory
+
+    - name: Create Vagrantfile
+      template:
+        src: Vagrantfile.j2
+        dest: "{{ vm_dir }}/Vagrantfile"
+
+    - name: Start Vagrant VM
+      command: vagrant up
+      args:
+        chdir: "{{ vm_dir }}"
+
+    - name: Check VM status
+      command: vagrant status
+      args:
+        chdir: "{{ vm_dir }}"
